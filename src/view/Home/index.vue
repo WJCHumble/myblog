@@ -1,7 +1,7 @@
 <template>
     <div>
         <List item-layout="vertical" :border="true">
-            <ListItem v-for="item in list" :key="item.title">
+            <ListItem v-for="(item, index) in list" :key="index">
                 <ListItemMeta :avatar="item.avatar" :description="item.description" >
                     <template slot="title">
                         <div  @click="$router.push('/article/0')">
@@ -25,6 +25,13 @@
                 </template>
             </ListItem>
         </List>
+        <div class="page">
+            <Page 
+                :total="100" 
+                :pageSize="pageSize"
+                :current="pageNum"
+                show-elevator />
+        </div>
     </div>
 </template>
 
@@ -48,10 +55,24 @@ export default {
                         avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
                         content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
                     },
+                    {
+                        title: '谈谈自学编程这件事',
+                        description: '',
+                        avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
+                        content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
+                    },
+                    {
+                        title: '谈谈自学编程这件事',
+                        description: '',
+                        avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
+                        content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
+                    }
                 ],
             exploreCount: null,
             commentCount: null,
-
+            total: 100,
+            pageSize: 10,
+            pageNum: 1
         }
     },
     methods: {
@@ -74,4 +95,9 @@ div /deep/ .ivu-list-items
     overflow hidden
     -webkit-line-clamp 2
     -webkit-box-orient vertical
+
+.page 
+    text-align center
+    margin-top 16px
+    margin-bottom 16px
 </style>
