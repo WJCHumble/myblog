@@ -17,6 +17,11 @@ export function createRouter() {
           component: () => import("../view/Home/index.vue")
         },
         {
+          path: "/blog",
+          name: 'Blog',
+          component: () => import("../view/Blog/index.vue")
+        },
+        {
           path: "/about",
           name: "About",
           component: () => import("../view/About/index.vue")
