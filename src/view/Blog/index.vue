@@ -9,7 +9,14 @@
         </div>
         <!-- 对应分类的内容 -->
         <div class="content">
-
+            <List>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                </ListItem>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                </ListItem>
+            </List>
         </div>
     </div>
 </template>
@@ -81,7 +88,7 @@ export default {
             font-size 12px
             &:hover
                 cursor pointer
-                color  #f60
+                color  #4FE8DA
                 background #F9FAFB
         span:nth-child(2)
             margin-left 40px
@@ -99,6 +106,18 @@ export default {
     padding 20px
     background #fff
 .selected
-    background #f60
+    background #4FE8DA
     color #fff
+@media (max-width 600px)
+    .category
+        padding 10px    
+        .category-item
+            span
+                padding 2px 4px
+                margin-right 14px
+                font-size 10px
+            span:nth-child(2)
+                margin-left 10px
+            span:last-child
+                margin 0px
 </style>

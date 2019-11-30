@@ -84,7 +84,7 @@ export default {
 div /deep/ .ivu-list-item-meta-title
     &:hover
         cursor pointer
-        color #ff6600
+        color #4FE8DA
 
 div /deep/ .ivu-list-items
     background #fff

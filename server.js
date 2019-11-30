@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+// const http = require('http')
 // 用于组件缓存的插件
 const LRU = require('lru-cache')
 const express = require('express')
@@ -10,7 +11,7 @@ const microcache = require('route-cache')
 const resolve = file => path.resolve(__dirname, file)
 // 用于创建和使用bundle renderer 热重载
 const {createBundleRenderer} = require('vue-server-renderer')
-const axios = require('axios')
+// const axios = require('axios')
 // const websiteConfig = require('./src/config/website')
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -74,7 +75,7 @@ app.use(compression({threshold: 0}))
 app.use(favicon('./public/blog-48.png'))
 app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
-app.use('/manifest.json', serve('./manifest.json', true))
+// app.use('/manifest.json', serve('./manifest.json', true))
 // app.use('/service-worker.js', serve('./dist/service-worker.js'))
 
 // since this app has no user-specific content, every page is micro-cacheable.
@@ -86,6 +87,7 @@ app.use('/manifest.json', serve('./manifest.json', true))
 app.use(microcache.cacheSeconds(1, req => useMicroCache && req.originalUrl))
 
 function render(req, res) {
+    console.log(`访问的ip是${req.ip}`)
     const s = Date.now()
 
     res.setHeader("Content-Type", "text/html")
@@ -135,10 +137,15 @@ function render(req, res) {
 // });
 
 app.get('*', isProd ? render : (req, res) => {
+    console.log('请求中')
     readyPromise.then(() => render(req, res))
 })
 
 const port = process.env.PORT || 8082;
-app.listen(port, () => {
-    console.log(`server started at localhost:${port}`)
+const server = app.listen(port, () => {
+    const host = server.address().address
+    const port = server.address().port
+    console.log(`Server running at http://${host}:${port}`)
 })
+
+

@@ -40,7 +40,8 @@ a
   text-decoration none
 
 .header
-  background-color #ff6600
+  background-color #6AC1FF
+  opacity 0.78
   position fixed
   z-index 999
   height 55px
