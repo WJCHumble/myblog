@@ -23,7 +23,8 @@ export default {
     title: "文章详情",
     metaInfo: {
         meta: []
-    }
+    },
+    data:{}
 }
 </script>
 

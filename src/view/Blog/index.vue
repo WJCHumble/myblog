@@ -4,7 +4,7 @@
         <div class="category">
             <div class="category-item" v-for="(category, index) in categoryList" :key="index">
                 <span class="item-name">{{category.category}}</span>
-                <span v-for="(item, index) in category.list" :key="index" @click="selected = item" :class="{selected: item === selected}">{{item}}</span>
+                <span v-for="(item, index) in category.list" :key="index" @click="switchType(item)" :class="{selected: item === selected}">{{item}}</span>
             </div>
         </div>
         <!-- 对应分类的内容 -->
@@ -68,6 +68,12 @@ export default {
                 },
             ],
             selected: 'HTML' // 记录当前选中项
+        }
+    },
+    methods: {
+        switchType(item) {
+            this.selected = item
+            
         }
     }
 }
