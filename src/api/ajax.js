@@ -9,7 +9,7 @@ export default function ajax (url, data={}, type='GET') {
 	//返回一个Promise对象
 	return new Promise(function (resolve, reject) {
         const BASE_URL
-        if (process.NODE_ENV === 'dev') {
+        if (process.env.NODE_ENV === 'dev') {
             // 开发环境请求地址
         } else {
             // 生产环境
