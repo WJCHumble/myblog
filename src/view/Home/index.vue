@@ -1,36 +1,12 @@
 <template>
     <div>
-        <List item-layout="vertical" :border="true">
-            <ListItem v-for="(item, index) in list" :key="index">
-                <ListItemMeta :avatar="item.avatar" :description="item.description" >
-                    <template slot="title">
-                        <div  @click="$router.push('/article/0')">
-                            {{item.title}}
-                        </div>
-                    </template>
-                </ListItemMeta>
-                <div class="abstract">
-                    {{ item.content }}
-                </div>
-                <template slot="action">
-                    <li>
-                        <Icon type="ios-eye-outline" :size="20"/> {{exploreCount}}
-                    </li>
-                    <li>
-                        <Icon type="ios-chatbubbles-outline" /> {{commentCount}}
-                    </li>
-                </template>
-                <template slot="extra">
-                    <img src="https://dev-file.iviewui.com/5wxHCQMUyrauMCGSVEYVxHR5JmvS7DpH/large" style="width: 280px">
-                </template>
-            </ListItem>
-        </List>
-        <div class="page">
-            <Page 
-                :total="100" 
-                :pageSize="pageSize"
-                :current="pageNum"
-                show-elevator />
+        <div class="banner">
+          <div class="word">
+            <div class="motto">
+              <h1>坚持<br>时间会给你答案</h1>
+              <p>自学编程的第&nbsp;<span>{{totalDays}}</span>&nbsp;天</p>
+            </div>
+          </div>
         </div>
     </div>
 </template>
@@ -46,36 +22,28 @@ export default {
             }
         ]
     },
+    created() {
+        this.initDayCounts()
+    },
     data() {
         return {
-            list: [
-                    {
-                        title: '谈谈自学编程这件事',
-                        description: '',
-                        avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
-                        content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
-                    },
-                    {
-                        title: '谈谈自学编程这件事',
-                        description: '',
-                        avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
-                        content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
-                    },
-                    {
-                        title: '谈谈自学编程这件事',
-                        description: '',
-                        avatar: 'https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg',
-                        content: '依稀记得，以前高中很喜欢读的一个杂志上写的一句话：“老天总爱和人开玩笑，人生之不如意十之八九”'
-                    }
-                ],
-            exploreCount: null,
-            commentCount: null,
-            total: 100,
-            pageSize: 10,
-            pageNum: 1
+            totalDays: 0, //学习编程的总时间
         }
     },
     methods: {
+        initDayCounts() {
+            // 最早学编程的时间 2018年3月10号
+            const date = new Date()
+            
+            const totalDays = (date.getFullYear()-2018)*365 + (date.getMonth() - 3)*30 + date.getDate() - 10
+
+            for (let i = 0; i < totalDays; i++) {
+                let timer = setTimeout(() => {
+                    this.totalDays++
+                    timer = null    
+                }, 500)
+            }
+        }
     }
 }
 </script>
@@ -100,4 +68,33 @@ div /deep/ .ivu-list-items
     text-align center
     margin-top 16px
     margin-bottom 16px
+
+.banner 
+  position absolute
+  top 0px
+  width 100%
+  height 100%;
+  background url('https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/landscape2.jpeg') center center no-repeat
+  background-size 100% 
+  .word
+    margin 0 auto
+    width 1200px
+    height 320px
+    padding-top 200px
+    letter-spacing .2em
+    .motto
+      margin-left 680px
+      width 520px
+      h1
+        width 520px
+        font-size 70px
+        font-weight normal
+        color #fff
+      p 
+        margin-top 60px
+        font-size 22px
+        color #465E20
+        span
+            width 80px
+            font-size 34px
 </style>

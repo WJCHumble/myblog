@@ -19,8 +19,11 @@ const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
     `express/${require('express/package.json').version} ` +
     `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
+const router = require('./routes/index')
 
 const app = express()
+
+router(app)
 
 // 定义创建bundle renderer的方法
 function createRenderer(bundle, options) {

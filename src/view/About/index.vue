@@ -66,9 +66,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.view
+  padding-top 70px
+  max-width 1200px
+  margin 0 auto
+  position relative
+
 .about 
-    margin-top 20px
-    padding 20px
+    margin-top 70px
+    padding 30px
     min-height 610px
     background #fff
     word-spacing 4px
@@ -83,7 +89,7 @@ export default {
     position relative
     left 50%
     transform translate(-14%, 0)
-    margin-bottom 40px
+    margin-bottom 50px
     width 50%
     letter-spacing 8px
     font-size 20px
@@ -91,28 +97,28 @@ export default {
     &:after
         position absolute
         top 18px
-        left 122px
+        left 120px
         content ''
-        width 80%
+        width 92%
         height 2px
         background #f2f3f5
     &:before
         position absolute
         top 18px
-        right 400px
+        right 590px
         content ''
-        width 80%
+        width 84%
         height 2px
         background #f2f3f5
 .concat-me
     transform translate(-10%, 0)
-    margin-top 30px
+    margin-top 40px
     &:after
-        width 87%
-        left 90px
+        width 94%
+        left 100px
     &:before 
-       right 394px
-       width 88% 
+       right 600px
+       width 84% 
 .concat-way 
     text-align center
     font-size 16px

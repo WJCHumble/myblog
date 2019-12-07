@@ -2,11 +2,11 @@
     <div>
         <header class="header">
             <nav class="inner">
-                <router-link to="/" exact>
+                <router-link to="/home" exact>
                 <img class="logo" src="~public/blog.png" alt="logo">
                 </router-link>
                 <router-link v-for="category in categories" :to="category.path" :key="category.id">{{category.title}}</router-link>
-                <a class="github" href="/home" rel="noopener">
+                <a class="blog-name" href="/home" rel="noopener">
                     吴敬昌的技术博客
                 </a>
             </nav>
@@ -35,40 +35,37 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-a
-  color #34495e
-  text-decoration none
-
 .header
-  background-color #6AC1FF
-  opacity 0.78
+  background transparent
+  background rgba(13,13,13,0.45)
   position fixed
   z-index 999
-  height 55px
+  height 77px
   top 0
   left 0
   right 0
   .inner
-    max-width 800px
+    max-width 1200px
     box-sizing border-box
     margin 0px auto
     padding 15px 5px
   a
     flex 1
-    color rgba(255, 255, 255, .8)
-    line-height 24px
+    color #fff
+    line-height 40px
     transition color .15s ease
     display inline-block
     vertical-align middle
-    font-weight 300
-    letter-spacing .075em
-    margin-right 1em
+    font-weight 380
+    letter-spacing .3em
+    margin-right 3em
+    text-decoration none
     &:hover
-      color #fff
+      color #6AC1FF
     &.router-link-active
-      color #fff
-      font-weight 400
-  .github
+      color #6AC1FF
+      font-weight blod
+  .blog-name
     color #fff
     font-size .9em
     margin 0
@@ -79,11 +76,6 @@ a
   margin-right 10px
   display inline-block
   vertical-align middle
-
-.view
-  max-width 800px
-  margin 0 auto
-  position relative
 
 .fade-enter-active, .fade-leave-active
   transition all .2s ease
@@ -103,4 +95,5 @@ a
       margin-right 1em
     .github
       display none
+
 </style>

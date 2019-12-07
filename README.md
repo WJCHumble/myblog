@@ -27,3 +27,41 @@
         overflow hidden
         -webkit-line-clamp 2
         -webkit-box-orient vertical
+
+4. mysql数据库连接问题
+    由于我每一次访问controller都会引用数据库连接，所以会导致我多次访问多次连接，然后崩溃...
+    所以，我需要用 MySQL 连接池来管理数据库连接
+```javascript
+const mysql = require('mysql')
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'myblog',
+    port: 3306
+})
+
+const query = function (sql, callback) {
+    pool.getConnection(function(err, conn) {
+        if (err) {
+            callback(err, null, null)
+        } else {
+            conn.query(sql, function(qerr, vals, fields) {
+                // 释放链接
+                conn.release()
+                callback(qerr, vals. fields)
+            })
+        }
+    })
+}
+```
+
+5. 解决mapState不能被解析的问题
+```javascript
+    "presets": [
+        "stage-2"
+    ],
+```
+
+6. 需要注意的是在 action、asyncData 中都需要return 一个Promise
+

@@ -42,9 +42,4 @@ body
 .fade-enter, .fade-leave-active
   opacity 0
 
-.view
-  padding-top 20px
-  max-width 800px
-  margin 0 auto
-  position relative
 </style>

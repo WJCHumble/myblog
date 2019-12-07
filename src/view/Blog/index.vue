@@ -22,64 +22,78 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
     title: "博客",
     metaInfo: {
         meta: []
     },
+    // 它会在组件实例化前调用，注意不要使用this!
+    asyncData({store}) {
+        return store.dispatch('getCategoryList')
+    },
     data() {
         return {
-            categoryList: [
-                {
-                    category: '基础',
-                    list: [
-                        'HTML',
-                        'CSS',
-                        'JavaScript',
-                        'ES6',
-                        'TypeScript',
-                    ]
-                },
-                {
-                    category: '框架',
-                    list: [
-                        'Vue',
-                        'React',
-                        'Node',
-                        'Nuxt',
-                        'Express',
-                        '微信小程序'
-                    ]
-                },
-                {
-                    category: '数据库',
-                    list: [
-                        'MySQL',
-                        'Mongo'
-                    ]
-                },
-                {
-                    category: '其他',
-                    list: [
-                        'HTTP',
-                        'Nginx',
-                        'Redis'
-                    ]
-                },
-            ],
+            // categoryList: [
+            //     {
+            //         category: '基础',
+            //         list: [
+            //             'HTML',
+            //             'CSS',
+            //             'JavaScript',
+            //             'ES6',
+            //             'TypeScript',
+            //         ]
+            //     },
+            //     {
+            //         category: '框架',
+            //         list: [
+            //             'Vue',
+            //             'React',
+            //             'Node',
+            //             'Nuxt',
+            //             'Express',
+            //             '微信小程序'
+            //         ]
+            //     },
+            //     {
+            //         category: '数据库',
+            //         list: [
+            //             'MySQL',
+            //             'Mongo'
+            //         ]
+            //     },
+            //     {
+            //         category: '其他',
+            //         list: [
+            //             'HTTP',
+            //             'Nginx',
+            //             'Redis'
+            //         ]
+            //     },
+            // ],
             selected: 'HTML' // 记录当前选中项
         }
+    },
+    computed: {
+        ...mapState(['categoryList'])
     },
     methods: {
         switchType(item) {
             this.selected = item
-            
         }
     }
 }
 </script>
 
 <style lang="stylus" scoped>
+.view
+  padding-top 70px
+  max-width 1200px
+  margin 0 auto
+  position relative
+  
 .category
     padding 20px
     border-radius 4px

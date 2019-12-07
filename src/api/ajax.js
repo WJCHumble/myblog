@@ -8,9 +8,11 @@ import axios from 'axios'
 export default function ajax (url, data={}, type='GET') {
 	//返回一个Promise对象
 	return new Promise(function (resolve, reject) {
-        const BASE_URL
+		let BASE_URL = 'http://localhost:8085/api/'
+
         if (process.env.NODE_ENV === 'dev') {
-            // 开发环境请求地址
+			// 开发环境请求地址
+			BASE_URL = 'http://localhost:8085/api/'
         } else {
             // 生产环境
         }
