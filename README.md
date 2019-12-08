@@ -11,6 +11,7 @@ Vue SSR + Express + MySQL + iView + Stylus
 1. 路由配置，不需要单独为App.vue配置一个最高级的路由/，在app.js中就已经渲染了它
 
 2. 引入iview，webpack报错不能解析字体，在webpack.base.config中添加字体文件如下配置
+```javascript
     ,{
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
@@ -19,14 +20,17 @@ Vue SSR + Express + MySQL + iView + Stylus
         name: 'fonts/[name].[hash:7].[ext]'
         }
     }
+```
 
 3. 摘要文本溢出处理
+```javascript
     .abstract 
         color #34495e
         display -webkit-box
         overflow hidden
         -webkit-line-clamp 2
         -webkit-box-orient vertical
+```
 
 4. mysql数据库连接问题
     由于我每一次访问controller都会引用数据库连接，所以会导致我多次访问多次连接，然后崩溃...
