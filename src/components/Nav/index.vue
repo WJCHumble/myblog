@@ -3,12 +3,14 @@
         <header class="header">
             <nav class="inner">
                 <router-link to="/home" exact>
-                <img class="logo" src="~public/blog.png" alt="logo">
+                  <img class="logo" src="~public/blog.png" alt="logo">
                 </router-link>
-                <router-link v-for="category in categories" :to="category.path" :key="category.id">{{category.title}}</router-link>
                 <a class="blog-name" href="/home" rel="noopener">
                     吴敬昌的技术博客
                 </a>
+                <div class="nav">
+                  <router-link v-for="category in categories" :to="category.path" :key="category.id">{{category.title}}</router-link>
+                </div>
             </nav>
         </header>
     </div>
@@ -37,7 +39,7 @@ export default {
 <style lang="stylus" scoped>
 .header
   background transparent
-  background rgba(13,13,13,0.45)
+  background #24292e
   position fixed
   z-index 999
   height 77px
@@ -49,8 +51,11 @@ export default {
     box-sizing border-box
     margin 0px auto
     padding 15px 5px
+  .nav
+    float right
+    a 
+      margin-left 30px
   a
-    flex 1
     color #fff
     line-height 40px
     transition color .15s ease
@@ -58,22 +63,20 @@ export default {
     vertical-align middle
     font-weight 380
     letter-spacing .3em
-    margin-right 3em
     text-decoration none
+    &:nth-child(1)
+      margin-right 10px
     &:hover
       color #6AC1FF
     &.router-link-active
       color #6AC1FF
       font-weight blod
   .blog-name
+    margin-right 20px
     color #fff
-    font-size .9em
-    margin 0
-    float right
 
 .logo
   width 24px
-  margin-right 10px
   display inline-block
   vertical-align middle
 

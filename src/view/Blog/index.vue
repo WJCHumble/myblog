@@ -89,7 +89,7 @@ export default {
 
 <style lang="stylus" scoped>
 .view
-  padding-top 70px
+  padding-top 14px
   max-width 1200px
   margin 0 auto
   position relative
