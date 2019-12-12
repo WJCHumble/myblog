@@ -9,7 +9,7 @@
         <div class="right-content">
             <!-- banner -->
              <Carousel v-model="value1" autoplay :height="360" loop>
-                <CarouselItem>
+                <!-- <CarouselItem>
                     <img src="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/banner.png" alt="">
                 </CarouselItem>
                 <CarouselItem>
@@ -17,6 +17,9 @@
                 </CarouselItem>
                 <CarouselItem>
                     <img src="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/banner3.png" alt="">
+                </CarouselItem> -->
+                <CarouselItem v-for="(item, index) in bannerList" :key="index">
+                    <img :src="item.banner_img"/>
                 </CarouselItem>
             </Carousel>
             <br>
@@ -50,6 +53,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     title: "首页",
     metaInfo: {
@@ -60,8 +64,14 @@ export default {
             }
         ]
     },
+    asyncData({store}) {
+        return store.dispatch('getBannerList')
+    },
     created() {
         this.initDayCounts()
+    },
+    computed: {
+        ...mapState(['bannerList'])
     },
     data() {
         return {

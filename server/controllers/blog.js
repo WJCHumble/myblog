@@ -2,7 +2,7 @@ const query = require("../db/index")
 
 function getCategory(req, res, next) {
 
-    // 连接
+    // 连接查询
     const sql = 'SELECT category.category_name, category_detail.tech_name FROM category INNER JOIN category_detail ON category.id=category_detail.category_id'
 
     query(sql, (err, result) => {
@@ -41,7 +41,7 @@ function getCategory(req, res, next) {
             }
         }
         // 设置响应头
-        res.setHeader('Content-Type', 'text/html;charset=utf-8')
+        // res.setHeader('Content-Type', 'text/html;charset=utf-8')
 
         res.end(JSON.stringify(data))
     })

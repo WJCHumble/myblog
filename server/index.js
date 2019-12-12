@@ -141,6 +141,7 @@ function render(req, res) {
 
 app.get('*', isProd ? render : (req, res) => {
     console.log('请求中')
+    res.setHeader('Content-Type', 'text/html;charset=utf-8')
     readyPromise.then(() => render(req, res))
 })
 
