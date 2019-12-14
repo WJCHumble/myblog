@@ -11,11 +11,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <link rel="shortcut icon" sizes="48x48" href="/public/blog-48.png">
     <link rel="stylesheet" href="/public/reset.css">
+    <!-- 用于高光 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.13.0/styles/github-gist.min.css"/>
     <meta name="theme-color" content="#f60">
     <link rel="manifest" href="/manifest.json">
     <style>
       #skip a {  position:absolute;  left:-10000px;  top:auto;  width:1px;  height:1px;  overflow:hidden;  }
       #skip a:focus {  position:static;  width:auto;  height:auto;  }
+      .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+      }
+      @media (max-width: 767px) {
+          .markdown-body {
+            padding: 15px;
+          }
+      }
     </style>
   </head>
   <body>

@@ -19,10 +19,7 @@ function getBanner(req, res, next) {
             }
         }
 
-        // 设置响应头
-        // res.setHeader('Content-Type', 'text/html;charset=utf-8')
-
-        res.end(JSON.stringify(data))
+        res.json(data)
     })
 }
 

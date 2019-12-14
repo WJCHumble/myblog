@@ -69,3 +69,36 @@ const query = function (sql, callback) {
 
 6. 需要注意的是在 action、asyncData 中都需要return 一个Promise
 
+7. markdown 文件在前端页面展示问题
+由于后台暂时没有去做，所以我先将我自己写好的.md文件解析成的Html文件存入数据库，然后需要展示的时，就从数据库中取出，样式问题，通过安装 github-markdown-css 来实现 markdown 文件的展示效果
+```javascript
+npm install --save github-markdown-css
+```
+页面引用
+```javascrip
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.13.0/styles/github-gist.min.css"/>
+
+import 'github-markdown-css/github-markdown.css'
+
+<div class="markdown-body">
+
+</div>
+
+<style>
+    .markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+</style>
+```
+后期会把后台做上去，应该会用 SimpleMarkdown 这个插件。
+

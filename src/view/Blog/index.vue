@@ -10,20 +10,29 @@
         <!-- 对应分类的内容 -->
         <div class="content">
             <List>
-                <ListItem>
+                <ListItem v-for="article in articleList" :key="article.article_id">
+                    <ListItemMeta 
+                        avatar="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg" 
+                        :title="article.article_title" 
+                        :description="article.article_abstract"
+                    />
+                </ListItem>
+                <!-- <ListItem>
                     <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
                 </ListItem>
                 <ListItem>
                     <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
-                </ListItem>
+                </ListItem> -->
             </List>
+        </div>
+        <div class="markdown-body">
         </div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
+import 'github-markdown-css/github-markdown.css'
 export default {
     title: "博客",
     metaInfo: {
@@ -31,53 +40,18 @@ export default {
     },
     // 它会在组件实例化前调用，注意不要使用this!
     asyncData({store}) {
-        return store.dispatch('getCategoryList')
+        return Promise.resolve().then(() => {
+            store.dispatch('getCategoryList')
+            store.dispatch('getArticleList', 3)
+        })
     },
     data() {
         return {
-            // categoryList: [
-            //     {
-            //         category: '基础',
-            //         list: [
-            //             'HTML',
-            //             'CSS',
-            //             'JavaScript',
-            //             'ES6',
-            //             'TypeScript',
-            //         ]
-            //     },
-            //     {
-            //         category: '框架',
-            //         list: [
-            //             'Vue',
-            //             'React',
-            //             'Node',
-            //             'Nuxt',
-            //             'Express',
-            //             '微信小程序'
-            //         ]
-            //     },
-            //     {
-            //         category: '数据库',
-            //         list: [
-            //             'MySQL',
-            //             'Mongo'
-            //         ]
-            //     },
-            //     {
-            //         category: '其他',
-            //         list: [
-            //             'HTTP',
-            //             'Nginx',
-            //             'Redis'
-            //         ]
-            //     },
-            // ],
             selected: 'HTML' // 记录当前选中项
         }
     },
     computed: {
-        ...mapState(['categoryList'])
+        ...mapState(['categoryList', 'articleList'])
     },
     methods: {
         switchType(item) {

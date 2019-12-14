@@ -9,7 +9,8 @@ export function createStore() {
     return new Vuex.Store({
         state: {
             categoryList: [],
-            bannerList: []
+            bannerList: [],
+            articleList: []
         },
         actions,
         mutations

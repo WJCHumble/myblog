@@ -4,6 +4,7 @@ import { createStore } from './store'
 import { createRouter } from './router'
 import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
+
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'

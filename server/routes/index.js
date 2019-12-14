@@ -1,7 +1,7 @@
-const category = require('./blog')
-const banner = require('./home')
+const blog = require('./blog')
+const home = require('./home')
 
 module.exports = function (app) {
-    app.use(category)
-    app.use(banner)
+    app.use(blog)
+    app.use(home)
 }

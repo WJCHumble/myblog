@@ -1,6 +1,7 @@
 import {
     GET_CATEGORY_LIST,
-    GET_BANNER_LIST
+    GET_BANNER_LIST,
+    GET_ARTICLE_LIST
 } from './mutation-types'
 
 export default {
@@ -9,5 +10,8 @@ export default {
    },
    [GET_BANNER_LIST](state, bannerList) {
        state.bannerList = bannerList
+   },
+   [GET_ARTICLE_LIST](state, articleList) {
+       state.articleList = articleList
    }
 }

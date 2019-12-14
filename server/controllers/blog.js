@@ -40,13 +40,36 @@ function getCategory(req, res, next) {
                 categoryList
             }
         }
-        // 设置响应头
-        // res.setHeader('Content-Type', 'text/html;charset=utf-8')
 
-        res.end(JSON.stringify(data))
+        res.json(data)
+    })
+}
+
+function getArticleList(req, res, next) {
+    // 获取前端传的技术类别ID
+    const techId = req.query.techId
+    console.log(techId)
+    // 默认取前10条
+    const sql = `SELECT article_id, article_title, article_abstract, create_date, read_count FROM article WHERE tech_id = '${techId}' LIMIT 10`
+
+    query(sql, (err, result) => {
+        if (err) {
+            console.log(`[SELECT ERROR] - `, err.message)
+            return
+        }
+        console.log(result)
+        let data = {
+            status: 1001,
+            message: 'success',
+            data: {
+                articleList: result
+            }
+        } 
+        res.json(data)
     })
 }
 
 module.exports = {
-    getCategory
+    getCategory,
+    getArticleList
 }
