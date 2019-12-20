@@ -113,6 +113,7 @@ function render(req, res) {
         title: '吴敬昌的个人博客', // default title
         url: req.url
     }
+    
     renderer.renderToString(context, (err, html) => {
         if (err) {
             return handleError(err)

@@ -29,10 +29,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.view
+  padding-top 14px
+  max-width 1200px
+  margin 0 auto
+  position relative
+
 .article
     margin-top 20px
-    width 100%
-    padding 20px
+    padding 40px
     background #fff
     .title
         font-size 24px

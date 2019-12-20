@@ -3,7 +3,7 @@ const query = require("../db/index")
 function getCategory(req, res, next) {
 
     // 连接查询
-    const sql = 'SELECT category.category_name, category_detail.tech_name FROM category INNER JOIN category_detail ON category.id=category_detail.category_id'
+    const sql = 'SELECT category.category_name, category_detail.tech_name, category_detail.tech_id FROM category INNER JOIN category_detail ON category.id=category_detail.category_id'
 
     query(sql, (err, result) => {
         if (err) {
@@ -15,17 +15,21 @@ function getCategory(req, res, next) {
             if (categoryList.length === 0) {
                 categoryList[0] = {
                     category: value.category_name,
-                    list: [value.tech_name]
+                    list: [
+                        {id: value.tech_id, value: value.tech_name}
+                    ]
                 }
             }
             categoryList.map((categoryItem, index) => {
-                if (categoryItem['category'] === value.category_name && !categoryItem.list.includes(value.tech_name)) {
-                    categoryItem.list.push(value.tech_name)
+                if (categoryItem['category'] === value.category_name && value.tech_name !== 'HTML') {
+                    categoryItem.list.push({id: value.tech_id, value: value.tech_name})
                 }
                 if (categoryItem['category'] !== value.category_name && index === categoryList.length - 1) {
                     value = {
                         category: value.category_name,
-                        list: [value.tech_name]
+                        list: [
+                            {id: value.tech_id, value: value.tech_name}
+                        ]
                     }
                     categoryList.push(value)
                 }
@@ -50,7 +54,7 @@ function getArticleList(req, res, next) {
     const techId = req.query.techId
     console.log(techId)
     // 默认取前10条
-    const sql = `SELECT article_id, article_title, article_abstract, create_date, read_count FROM article WHERE tech_id = '${techId}' LIMIT 10`
+    const sql = `SELECT article_id, article_title, article_abstract, create_date, read_count, article_img FROM article WHERE tech_id = '${techId}' LIMIT 10`
 
     query(sql, (err, result) => {
         if (err) {
