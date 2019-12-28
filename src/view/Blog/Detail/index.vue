@@ -45,12 +45,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.view
-  padding-top 14px
-  max-width 1000px
-  margin 0 auto
-  position relative
-
 .article
     margin-top 20px
     margin-bottom 40px

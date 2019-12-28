@@ -14,15 +14,18 @@ export default {
     },
     data() {
         return {
+          camera: null,
+          scene: null,
+          webGLRenderer: null,
+          mesh: null,
+          cloud: null,
+          controls: null
         }
     },
     components: {
       Nav
     },
-    methods: {
-      // 鼠标点击特效
-
-    }
+    methods: {}
 }
 </script>
 

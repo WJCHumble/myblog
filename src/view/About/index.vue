@@ -68,7 +68,7 @@ export default {
 <style lang="stylus" scoped>
 .view
   padding-top 14px
-  max-width 1200px
+  max-width 1000px
   margin 0 auto
   position relative
 
@@ -105,9 +105,9 @@ export default {
     &:before
         position absolute
         top 18px
-        right 590px
+        right 494px
         content ''
-        width 84%
+        width 86%
         height 2px
         background #f2f3f5
 .concat-me
@@ -117,8 +117,8 @@ export default {
         width 94%
         left 100px
     &:before 
-       right 600px
-       width 84% 
+       right 500px
+       width 88% 
 .concat-way 
     text-align center
     font-size 16px

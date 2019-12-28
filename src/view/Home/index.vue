@@ -9,15 +9,6 @@
         <div class="right-content">
             <!-- banner -->
              <Carousel v-model="value1" autoplay :height="360" loop>
-                <!-- <CarouselItem>
-                    <img src="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/banner.png" alt="">
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/banner2.png" alt="">
-                </CarouselItem>
-                <CarouselItem>
-                    <img src="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/banner3.png" alt="">
-                </CarouselItem> -->
                 <CarouselItem v-for="(item, index) in bannerList" :key="index">
                     <img :src="item.banner_img"/>
                 </CarouselItem>
@@ -27,7 +18,7 @@
                 <ListItem v-for="(item, index) in list" :key="index">
                     <ListItemMeta :avatar="item.avatar" :description="item.description" >
                         <template slot="title">
-                            <div  @click="$router.push('/article/0')">
+                            <div  @click="$router.push('/blog/detail/0')">
                                 {{item.title}}
                             </div>
                         </template>

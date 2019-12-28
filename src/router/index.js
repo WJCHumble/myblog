@@ -19,16 +19,29 @@ export function createRouter() {
         {
           path: "/blog",
           name: 'Blog',
-          component: () => import("../view/Blog/index.vue")
+          component: () => import ("../view/Blog/index.vue"),
+          children: [
+            {
+              path: "article",
+              component: () => import("../view/Blog/Article/index.vue"),
+              children:[
+                
+              ]
+            },
+            {
+              path: "detail/:id",
+              component: () => import("../view/Blog/Detail/index.vue")
+            },
+            {
+              path: '',
+              redirect: 'article'
+            }
+          ]
         },
         {
           path: "/about",
           name: "About",
           component: () => import("../view/About/index.vue")
-        },
-        {
-          path: "/article/:id",
-          component: () => import("../view/Article/index.vue")
         }
       ]
     });
