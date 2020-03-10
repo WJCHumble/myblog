@@ -40,8 +40,8 @@ export default {
 
 <style lang="stylus" scoped>
 .view
-  padding-top 14px
-  max-width 1000px
   margin 0 auto
+  padding-top 14px
+  width 1200px
   position relative
 </style>

@@ -1,14 +1,6 @@
 <template>
-    <div>
-        <!-- 分类 -->
-        <div class="category">
-            <div class="category-item" v-for="(category, index) in categoryList" :key="index">
-                <span class="item-name">{{category.category}}</span>
-                <span v-for="(item, index) in category.list" :key="index" @click="switchType(item)" :class="{selected: item.value === selected}">{{item.value}}</span>
-            </div>
-        </div>
-        <!-- 对应分类的内容 -->
-        <div class="content">
+    <div class="page">
+        <div class="left-content">
             <List item-layout="vertical">
                 <ListItem v-for="(item, index) in articleList" :key="index">
                     <ListItemMeta avatar="https://wjchumble.oss-cn-hangzhou.aliyuncs.com/myblog/avatar.jpg">
@@ -32,8 +24,48 @@
                 </ListItem>
             </List>
         </div>
-        <div class="markdown-body">
+        <div class="right-content">
+            <!-- 文章分类 -->
+            <div class="category-list">
+                <h1>文章分类</h1>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="程序人生">程序人生</a>
+                    （100）
+                </div>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="译文">译文</a>
+                    （100）
+                </div>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="数据结构和算法">数据结构和算法</a>
+                    （100）
+                </div>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="前端">前端</a>
+                    （100）
+                </div>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="后端">后端</a>
+                    （100）
+                </div>
+                <div class="category-item">
+                    <Icon type="ios-paper" />
+                    <a href="#" title="运维">运维</a>
+                    （100）
+                </div>
+            </div>
+            <!-- 个人信息 -->
+            <div class="profile-info">
+
+            </div>
         </div>
+        <!-- <div class="markdown-body">
+        </div> -->
         <router-view></router-view>
     </div>
 </template>
@@ -73,52 +105,44 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.category
-    padding 20px
-    border-radius 4px
-    background #fff
-    div
-        margin-bottom 10px
-    .category-item
-        span
-            margin-right 40px
-            padding 4px 8px
-            border-radius 4px
-            font-size 12px
-            &:hover
-                cursor pointer
-                color  #4FE8DA
-                background #F9FAFB
-        span:nth-child(2)
-            margin-left 40px
-        .item-name
-            margin-right 0px
-            width 100px
-            font-size 15px
-            font-weight bold
-            &:hover
-                cursor text
-                color #34495e
-.content
-    margin-top 10px
+.page   
     min-height 400px
+    width 100%
+    display flex
+
+.left-content
+    flex 6
     padding 20px
+    min-height 400px
     background #fff
-.selected
-    background #4FE8DA
-    color #fff
-@media (max-width 600px)
-    .category
-        padding 10px    
+
+.right-content
+    margin-left 10px
+    flex 2
+    min-height 300px
+    .category-list
+        margin-bottom 10px
+        padding 20px
+        width 100%
+        background #fff
+        h1 
+            padding-bottom 10px
+            font-size 18px
+            border-bottom 1px solid #e8eaec
         .category-item
-            span
-                padding 2px 4px
-                margin-right 14px
-                font-size 10px
-            span:nth-child(2)
+            width 100%
+            height 40px
+            line-height 40px
+            a
                 margin-left 10px
-            span:last-child
-                margin 0px
+                color #000
+                text-decoration underline
+    .profile-info
+        width 100%
+        height 200px
+        background #fff
+            
+
 div /deep/ .ivu-list-item-meta-title
     &:hover
         cursor pointer
@@ -129,12 +153,13 @@ div /deep/ .ivu-list-items
     background #fff
 
 .abstract 
-    height 40px
+    height 44px
     color #34495e
     display -webkit-box
     overflow hidden
     -webkit-line-clamp 2
     -webkit-box-orient vertical
+
 .article-img
     height 140px
 </style>
