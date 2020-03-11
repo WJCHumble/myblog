@@ -1,8 +1,13 @@
 const path = require('path')
+const os = require('os')
 const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const HappyPack = require('happypack')
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -16,8 +21,12 @@ module.exports = {
     filename: '[name].[chunkhash].js'
   },
   resolve: {
+    modules: [
+      path.resolve(__dirname, '../node_modules')
+    ],
     alias: {
-      'public': path.resolve(__dirname, '../public')
+      'public': path.resolve(__dirname, '../public'),
+      'page': path.resolve(__dirname, '../src/view')
     }
   },
   module: {
@@ -30,7 +39,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: isProd ? 'happypack/loader?id=happyBabel':'babel-loader',
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../server')],
         exclude: /node_modules/
       },
       {
@@ -48,7 +58,7 @@ module.exports = {
               use: 'css-loader?minimize',
               fallback: 'vue-style-loader'
             })
-          : ['vue-style-loader', 'css-loader']
+          : ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -66,12 +76,32 @@ module.exports = {
   },
   plugins: isProd
     ? [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
+        new ParallelUglifyPlugin({
+          parallel: true, // 开启并行压缩 默认线程=cup-1
+          cacheDir: path.resolve(__dirname, 'node_modules'),
+          uglifyOptions: {
+            output: {
+              comments: false
+            },
+            compress: {
+              drop_debugger: true,
+              drop_console: true
+            },
+            warnings: false
+          }
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
+        }),
+        new BundleAnalyzerPlugin(),
+        new HappyPack({
+          id: 'happyBabel',
+          loaders: [{
+            loader: 'babel-loader?cacheDirectory=true'
+          }],
+          threadPool: happyThreadPool,
+          verbose: true // 允许 HappyPack 输出日志
         })
       ]
     : [

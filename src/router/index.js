@@ -14,23 +14,23 @@ export function createRouter() {
         {
           path: "/home",
           name: "Home",
-          component: () => import("../view/Home/index.vue")
+          component: () => import("page/Home/index.vue")
         },
         {
           path: "/blog",
           name: 'Blog',
-          component: () => import ("../view/Blog/index.vue"),
+          component: () => import ("page/Blog/index.vue"),
           children: [
             {
               path: "article",
-              component: () => import("../view/Blog/Article/index.vue"),
+              component: () => import("page/Blog/Article/index.vue"),
               children:[
                 
               ]
             },
             {
               path: "detail/:id",
-              component: () => import("../view/Blog/Detail/index.vue")
+              component: () => import("page/Blog/Detail/index.vue")
             },
             {
               path: '',
@@ -41,7 +41,7 @@ export function createRouter() {
         {
           path: "/about",
           name: "About",
-          component: () => import("../view/About/index.vue")
+          component: () => import("page/About/index.vue")
         }
       ]
     });

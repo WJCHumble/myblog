@@ -7,6 +7,7 @@
     "dev": "node server/index.js",
     "pm2": "pm2 start server/index.js --watch",
     "start": "cross-env NODE_ENV=production node server",
+    "analyze": "cross-env NODE_ENV=production npm_config_report=true npm run build",
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules"
@@ -33,7 +34,8 @@
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.13",
     "vuex": "^3.0.1",
-    "vuex-router-sync": "^5.0.0"
+    "vuex-router-sync": "^5.0.0",
+    "webpack-parallel-uglify-plugin": "^1.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
@@ -46,6 +48,7 @@
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "happypack": "^5.0.1",
     "mysql": "^2.17.1",
     "rimraf": "^2.6.2",
     "stylus": "^0.54.5",
@@ -56,6 +59,7 @@
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.3",
     "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.1",

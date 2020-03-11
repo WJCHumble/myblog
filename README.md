@@ -102,3 +102,42 @@ import 'github-markdown-css/github-markdown.css'
 ```
 后期会把后台做上去，应该会用 SimpleMarkdown 这个插件。
 
+8. webpack 打包速度优化
+a. 完善 resolve
+```javascript
+resolve: {
+    modules: [
+      path.resolve(__dirname, '../node_modules')
+    ],
+    alias: {
+      'public': path.resolve(__dirname, '../public'),
+      'page': path.resolve(__dirname, '../src/view')
+    }
+  },
+```
+
+b. 代码压缩优化和 Babel 解析优化，分别引入了 ParallelUglifyPlugin，HappyPack
+```javascript
+new ParallelUglifyPlugin({
+    parallel: true, // 开启并行压缩 默认线程=cup-1
+    cacheDir: path.resolve(__dirname, 'node_modules'),
+    uglifyOptions: {
+    output: {
+        comments: false
+    },
+    compress: {
+        drop_debugger: true,
+        drop_console: true
+    },
+    warnings: false
+    }
+}),
+new HappyPack({
+    id: 'happyBabel',
+    loaders: [{
+     loader: 'babel-loader?cacheDirectory=true'
+    }],
+    threadPool: happyThreadPool,
+    verbose: true // 允许 HappyPack 输出日志
+})
+```
