@@ -7,7 +7,7 @@ import 'view-design/dist/styles/iview.css'
 
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
-import * as filters from './util/filters'
+// import * as filters from './util/filters'
 
 
 // mixin for handling title

@@ -1,17 +1,18 @@
 const path = require('path')
-const os = require('os')
-const webpack = require('webpack')
+const postcssconfig = require('../postcss.config.js')
 const vueConfig = require('./vue-loader.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const HappyPack = require('happypack')
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+const HardSourcePlugin = require('hard-source-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
 
 const isProd = process.env.NODE_ENV === 'production'
 
-module.exports = {
+const config = {
   devtool: isProd
     ? false
     : '#cheap-module-source-map',
@@ -40,7 +41,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: isProd ? 'happypack/loader?id=happyBabel':'babel-loader',
-        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../server')],
+        include: [
+          path.resolve(__dirname, '../src'), 
+          path.resolve(__dirname, '../server')
+        ],
         exclude: /node_modules/
       },
       {
@@ -49,7 +53,7 @@ module.exports = {
         options: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
-        }
+        },
       },
       {
         test: /\.css$/,
@@ -59,6 +63,11 @@ module.exports = {
               fallback: 'vue-style-loader'
             })
           : ['vue-style-loader', 'css-loader'],
+        include: [
+          path.resolve(__dirname, '../src'), 
+          path.resolve(__dirname, '../node_modules/view-design'),
+          path.resolve(__dirname, '../node_modules/github-markdown-css')
+        ]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -66,7 +75,11 @@ module.exports = {
         options: {
           limit: 10000,
           name: 'fonts/[name].[hash:7].[ext]'
-        }
+        },
+        include: [
+          path.resolve(__dirname, '../node_modules/view-design'),
+          path.resolve(__dirname, '../node_modules/github-markdown-css')
+        ]
       }
     ]
   },
@@ -78,9 +91,9 @@ module.exports = {
     ? [
         new ParallelUglifyPlugin({
           parallel: true, // 开启并行压缩 默认线程=cup-1
-          cacheDir: path.resolve(__dirname, 'node_modules'),
           uglifyOptions: {
             output: {
+              beautify: false,
               comments: false
             },
             compress: {
@@ -90,21 +103,26 @@ module.exports = {
             warnings: false
           }
         }),
-        new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin({
           filename: 'common.[chunkhash].css'
         }),
-        new BundleAnalyzerPlugin(),
         new HappyPack({
           id: 'happyBabel',
-          loaders: [{
-            loader: 'babel-loader?cacheDirectory=true'
-          }],
-          threadPool: happyThreadPool,
-          verbose: true // 允许 HappyPack 输出日志
-        })
+          loaders: [
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true
+              }
+            }
+          ]
+        }),
+        new BundleAnalyzerPlugin(),
+        new HardSourcePlugin()
       ]
     : [
         new FriendlyErrorsPlugin()
       ]
 }
+
+module.exports = smp.wrap(config)
