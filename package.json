@@ -29,7 +29,7 @@
     "route-cache": "0.4.3",
     "serve-favicon": "^2.4.5",
     "style-loader": "^1.0.0",
-    "three": "^0.112.1",
+    "three": "^0.137.0",
     "view-design": "^4.0.2",
     "vue": "^2.5.13",
     "vue-meta-info": "^0.1.7",
